@@ -1,0 +1,77 @@
+
+import java.util.Scanner; 
+public class  HexaicosadecimalNumber{ 
+
+    public static void main(String[] args){
+        while (true) {
+            Scanner scanner = new Scanner (System.in);
+            System.out.println("Please enter 'h' to convert from hexaicosadecmial to decimal,or 'd' to convert from decimal,or 'q' to quit:");
+            String response = scanner.nextLine();
+                       
+            if (response.equalsIgnoreCase("q")) {
+                  break;
+            } else if (response.equalsIgnoreCase("h")) {
+                  System.out.println("Please enter your hexaicosadecmial number:");
+                  response = scanner.nextLine();
+                  
+                  System.out.println((response)+ " (" + Double.valueOf(hexaicosadecimalStringToDouble(response)) + ")");
+                        
+            } else if (response.equalsIgnoreCase("d")) {
+                  
+                  System.out.println("Please enter your decimal number:");
+                  double myNumber = scanner.nextDouble();
+                  System.out.println(doubleToHexaicosadecimalString(myNumber)+  " ("+ myNumber +")");
+            } else {
+                  System.out.println("INVALID VALUE");
+            }
+            
+        }
+        
+    }
+    private String stringRepresentation;
+    private double doubleRepresentation;
+   
+    
+   
+    
+    public static double hexaicosadecimalStringToDouble(String in){
+        
+        int base = 1;
+  
+        int dec_val = 0;
+         
+  
+        for (int i = in.length() - 1; i >= 0; i--) {
+  
+            if (in.charAt(i) >= 'a'
+                && in.charAt(i) <= 'z') {
+                dec_val += (in.charAt(i) - 97) * base;
+  
+                base = base * 26;
+            }
+        }
+        return dec_val;
+        
+     } 
+    
+
+    public static String doubleToHexaicosadecimalString(double in) {    
+        int temp = (int) in;
+        if (temp == 0) return "0";
+        boolean negativo = temp < 0;
+        if (negativo) temp = -temp;
+        String  myString = "";
+        while (temp > 0){
+            int rem = temp % 26;
+            myString = (char)(rem + 'a') + myString;
+            temp = (temp - rem) / 26;
+
+        }
+        if (negativo) myString = "-" + myString;
+        return myString; 
+            
+        } 
+
+
+   
+}
